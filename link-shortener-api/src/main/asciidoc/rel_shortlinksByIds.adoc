@@ -1,0 +1,52 @@
+== shortlinksByIds
+
+=== Description
+Gets the list of ShortLinks requested by their identifiers. This is a templated link whose
+variable, {ids}, should be replaced by a ":" separated list of the requested identifiers.
+You can see examples below. Please always rely on the link relation and check its curie definition.
+
+==== Request
+
+[format="csv",width="100%",cols="2"]
+[frame="topbot",grid="none"]
+|======
+*Method*, GET
+*Templated*, Yes
+*Variable Name*, ids
+*Variable Type*, [identifier][:identifier]* (i.e. identifier1:identifier2:identifier3)
+*Body*, empty
+|======
+
+==== Response
+
+[format="psv",width="100%",cols="<10%,<25%,<10%,<55%", separator="#"]
+[options="header",frame="topbot",grid="rows"]
+|======
+#*Code*#Message#Content-Type#Body
+#*200*#Successfully retrieved
+#application/hal+json
+v#
+ {
+   "_embedded": {
+      "ex:shortLinks": [
+        {
+              "linkId": string,
+              "shortURL": string,
+              "longURL": string,
+              "_links": {
+                "self": {
+                  "href": string
+                }
+              }
+        }
+      ],
+      "_links": {
+          "curies": [
+            {
+              "href": string,
+              "name": string,
+              "templated": boolean
+            }
+          ]
+        }
+|======

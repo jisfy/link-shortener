@@ -1,0 +1,86 @@
+== shortlinks
+
+=== Description
+Gets the list of ShortLinks currently registered in the application
+
+==== Request
+
+[format="csv",width="100%",cols="2"]
+[frame="topbot",grid="none"]
+|======
+*Method*, GET
+*Body*, empty
+|======
+
+==== Response
+
+[format="psv",width="100%",cols="<10%,<25%,<10%,<55%", separator="#"]
+[options="header",frame="topbot",grid="rows"]
+|======
+#*Code*#Message#Content-Type#Body
+#*200*#Successfully retrieved
+#application/hal+json
+v#
+ {
+   "_embedded": {
+      "ex:shortLinks": [
+        {
+              "linkId": string,
+              "shortURL": string,
+              "longURL": string,
+              "_links": {
+                "self": {
+                  "href": string
+                }
+              }
+        }
+      ],
+      "_links": {
+          "curies": [
+            {
+              "href": string,
+              "name": string,
+              "templated": boolean
+            }
+          ]
+        }
+|======
+
+=== Description
+
+Shortens the given URL, providing and persisting a ShortLink representation in return
+
+==== Request
+
+[format="psv",width="100%",cols="2", separator="#"]
+[frame="topbot",grid="none"]
+|======
+#*Method*#POST
+#*Body*
+v#
+ URL
+#*Content-Type*#application/x-www-form-urlencoded
+|======
+
+==== Response
+
+[format="psv",width="100%",cols="<10%,<25%,<10%,<55%", separator="#"]
+[options="header",frame="topbot",grid="rows"]
+|======
+#*Code*#Message#Content-Type#Body
+#*200*#Successfully Created
+#application/hal+json
+v#
+ {
+    "linkId": string,
+    "shortURL": string,
+    "longURL": string,
+    "_links": {
+        "self": {
+            "href": string
+        }
+    }
+ }
+#*400*#Couldn't build a valid URL from <url>#text/plain#Empty
+|======
+

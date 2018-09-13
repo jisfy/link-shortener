@@ -1,0 +1,25 @@
+
+<div fxLayout="column" fxLayoutAlign="center stretch">
+  
+  <div class="form-group" [formGroup]="urlForm"
+      fxLayout="row" fxLayoutAlign="center stretch">
+      <div fxFlex="15%"></div>
+      <mat-form-field appearance="outline" fxFlex="70%">
+          <mat-label>Shorten URL</mat-label>
+          <textarea formControlName="urlControl" placeholder="http://..." matInput 
+                    cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" 
+                    cdkAutosizeMaxRows="8" (keydown.enter)="shorten($event)"></textarea>
+          <mat-hint>Type in the URL and hit Enter</mat-hint>
+          <mat-error *ngIf="urlForm.controls['urlControl'].hasError('pattern')">
+            <span>Malformed <strong>URL</strong>, http://hostname[:port]/[path]</span>
+          </mat-error>            
+      </mat-form-field>
+      <div fxFlex="15%"></div>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="center stretch">
+      <div fxFlex="25%"></div>
+      <mat-error fxFlex="50%" fxLayoutAlign="center center" *ngIf="operationFailed">Backend Error! {{ serviceErrorMessage }}</mat-error>
+      <div fxFlex="25%"></div>
+  </div>      
+</div>

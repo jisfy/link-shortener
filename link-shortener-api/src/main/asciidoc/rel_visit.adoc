@@ -1,0 +1,26 @@
+== shortlinks
+
+=== Description
+Performs a visit of the ShortLink where this link relation appears. Notice that
+visiting a ShortLink oftens results in its number of visits counter being
+incremented. Visiting a ShortLink has been made non-cacheable in order for the
+visit count to be as accurate as possible.
+
+==== Request
+
+[format="csv",width="100%",cols="2"]
+[frame="topbot",grid="none"]
+|======
+*Method*, GET
+*Body*, empty
+|======
+
+==== Response
+
+[format="psv",width="100%",cols="<10%,<25%,<10%,<55%", separator="#"]
+[options="header",frame="topbot",grid="rows"]
+|======
+#*Code*#Message#Content-Type#Body
+#*301*#Moved Permanently#text/plain#Location header with the longURL of the referenced ShortLink
+#*404*#Not Found#text/plain#Empty
+|======

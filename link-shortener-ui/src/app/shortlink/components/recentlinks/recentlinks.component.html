@@ -1,0 +1,50 @@
+<div fxLayout="column" fxLayoutAlign="center stretch">
+    <div fxLayout="row" fxLayoutAlign="center stretch">
+        <div fxFlex="20%" fxFlex.xs="5%"></div>
+        <mat-card class="rlnks_matcard" fxFlex="60%" fxFlex.xs="90%">
+            <mat-card-subtitle>Recently shortened...</mat-card-subtitle>
+            <div id="list" fxLayout="column" fxLayoutAlign="center stretch">                
+                    <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" 
+                        fxLayoutAlign="center stretch" fxFlexOffset="3%" fxFlexOffset.sm="7%"
+                        fxFlexOffset.xs="7%"
+                        *ngFor="let link of links">
+                        <div fxLayout="column" fxLayoutAlign="center stretch" fxFlex="65%">
+                            <span id="rlnk_long_url" 
+                                class="rlnks_long_url"
+                                fxLayoutAlign.sm="center center"
+                                fxLayoutAlign.xs="center center">
+                                <!-- replace with custom truncate pipe -->
+                                {{ link.longURL | slice:0:30 }}{{ (link.longURL.length > 30) ? "..." : ""}}
+                            </span>
+                            <a class="rlnks_link" href="{{ link.shortURL }}"
+                                fxLayoutAlign.sm="center center"
+                                fxLayoutAlign.xs="center center">
+                                {{ link.shortURL }}
+                            </a>
+                        </div>
+                        <div fxLayout="row" fxLayout.sm="column" fxLayout.xs="column"
+                            fxLayoutAlign="center center" 
+                            fxFlex="25%">
+                            
+                            <mat-icon matBadge="{{ link.visits }}" matBadgeColor="primary" matBadgePosition="below before"
+                                    matBadgeSize="medium" matTooltip="hits" svgIcon="bar_chart" md-48
+                                    fxFlexOffset="15%"
+                                    fxFlexOffset.sm="2%"
+                                    fxFlexOffset.xs="2%">
+                            </mat-icon>
+                            
+                            <button mat-raised-button class = "rlnks_copy_btn" 
+                                    matTooltip="copy to clipboard" color="primary" 
+                                    ngxClipboard [cbContent]="link.shortURL"
+                                    fxFlexOffset="15%"
+                                    fxFlexOffset.sm="5%"
+                                    fxFlexOffset.xs="5%"
+                                    >Copy
+                            </button>                                                    
+                        </div>
+                    </div>
+            </div>
+        </mat-card>  
+        <div fxFlex="20%" fxFlex.xs="5%"></div>
+    </div>
+</div>
